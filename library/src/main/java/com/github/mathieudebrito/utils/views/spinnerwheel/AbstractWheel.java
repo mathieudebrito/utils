@@ -410,21 +410,21 @@ public abstract class AbstractWheel extends View {
     //--------------------------------------------------------------------------
 
     /**
-     * Returns base dimension of the spinnerwheel — width for horizontal spinnerwheel, height for vertical
+     * Returns base dimension of the spinnerwheel - width for horizontal spinnerwheel, height for vertical
      *
      * @return width or height of the spinnerwheel
      */
     abstract protected int getBaseDimension();
 
     /**
-     * Returns base dimension of base item — width for horizontal spinnerwheel, height for vertical
+     * Returns base dimension of base item - width for horizontal spinnerwheel, height for vertical
      *
      * @return width or height of base item
      */
     abstract protected int getItemDimension();
 
     /**
-     * Processes MotionEvent and returns relevant position — x for horizontal spinnerwheel, y for vertical
+     * Processes MotionEvent and returns relevant position - x for horizontal spinnerwheel, y for vertical
      *
      * @param event MotionEvent to be processed
      * @return relevant position of the MotionEvent

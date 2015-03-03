@@ -4,11 +4,11 @@ android {
     compileSdkVersion 21
     buildToolsVersion "21.1.1"
 
-    // DO NOT FORGET TO UPDATE THE GRADLE.PROPERTIES
+    // DO NOT FORGET TO ALSO UPDATE THE GRADLE.PROPERTIES
     def versionMajor = 0
     def versionMinor = 0
-    def versionPatch = 2
-    // DO NOT FORGET TO UPDATE THE GRADLE.PROPERTIES
+    def versionPatch = 3
+    // DO NOT FORGET TO ALSO UPDATE THE GRADLE.PROPERTIES
 
     defaultConfig {
         minSdkVersion 15
