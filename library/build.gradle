@@ -7,7 +7,7 @@ android {
     // DO NOT FORGET TO ALSO UPDATE THE GRADLE.PROPERTIES
     def versionMajor = 0
     def versionMinor = 0
-    def versionPatch = 3
+    def versionPatch = 4
     // DO NOT FORGET TO ALSO UPDATE THE GRADLE.PROPERTIES
 
     defaultConfig {
