@@ -17,7 +17,7 @@ public class AppUtils {
         }
     }
 
-    public static String getAppName(Context context) {
+    public static String getName(Context context) {
         PackageManager lPackageManager = context.getPackageManager();
         ApplicationInfo lApplicationInfo = null;
         try {

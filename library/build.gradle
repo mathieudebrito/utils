@@ -7,7 +7,7 @@ android {
     // DO NOT FORGET TO ALSO UPDATE THE GRADLE.PROPERTIES
     def versionMajor = 0
     def versionMinor = 0
-    def versionPatch = 4
+    def versionPatch = 3
     // DO NOT FORGET TO ALSO UPDATE THE GRADLE.PROPERTIES
 
     defaultConfig {
@@ -29,13 +29,13 @@ dependencies {
     compile 'com.android.support:appcompat-v7:21.0.3'
 
     // Google
-    compile 'com.google.android.gms:play-services-base:6.5.+'
+    compile 'com.google.android.gms:play-services-base:6.5.87'
     compile 'com.google.guava:guava:18.0'
-    compile 'com.google.code.gson:gson:2.3.+'
+    compile 'com.google.code.gson:gson:2.3.1'
     compile 'com.nineoldandroids:library:2.4.0'
 
     // Custom Views
-    compile 'com.afollestad:material-dialogs:0.6.3.+'                   // Material dialogs
+    compile 'com.afollestad:material-dialogs:0.6.3.4'                   // Material dialogs
     compile 'com.github.gabrielemariotti.changeloglib:library:1.5.2'    // Changelog
 }
 
