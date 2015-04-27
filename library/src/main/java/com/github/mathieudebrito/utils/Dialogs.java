@@ -80,10 +80,11 @@ public class Dialogs {
         MaterialDialog dialog = new MaterialDialog.Builder(context)
                 .title(title)
                 .items(options)
-                .itemsCallbackSingleChoice(selected, new MaterialDialog.ListCallback() {
+                .itemsCallbackSingleChoice(selected, new MaterialDialog.ListCallbackSingleChoice() {
                     @Override
-                    public void onSelection(MaterialDialog dialog, View view, int position, CharSequence text) {
+                    public boolean onSelection(MaterialDialog materialDialog, View view, int position, CharSequence charSequence) {
                         listener.onItemSelected(position);
+                        return true;
                     }
                 })
                 .positiveText(R.string.utils_validate)
