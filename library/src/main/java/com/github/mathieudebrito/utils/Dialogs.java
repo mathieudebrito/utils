@@ -12,6 +12,7 @@ import android.widget.RatingBar;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.afollestad.materialdialogs.Theme;
 import com.github.mathieudebrito.utils.views.spinnerwheel.WheelVerticalView;
 import com.github.mathieudebrito.utils.views.spinnerwheel.adapters.NumericWheelAdapter;
 
@@ -41,6 +42,7 @@ public class Dialogs {
 
         MaterialDialog dialog = new MaterialDialog.Builder(context)
                 .title(title)
+                .theme(Theme.LIGHT)
                 .content(message)
                 .positiveText(R.string.utils_ok)
                 .show();
@@ -57,6 +59,7 @@ public class Dialogs {
         MaterialDialog dialog = new MaterialDialog.Builder(context)
                 .title(title)
                 .content(message)
+                .theme(Theme.LIGHT)
                 .positiveText(R.string.utils_validate)
                 .negativeText(R.string.utils_cancel)
                 .callback(new MaterialDialog.ButtonCallback() {
@@ -80,6 +83,7 @@ public class Dialogs {
         MaterialDialog dialog = new MaterialDialog.Builder(context)
                 .title(title)
                 .items(options)
+                .theme(Theme.LIGHT)
                 .itemsCallbackSingleChoice(selected, new MaterialDialog.ListCallbackSingleChoice() {
                     @Override
                     public boolean onSelection(MaterialDialog materialDialog, View view, int position, CharSequence charSequence) {
@@ -98,6 +102,7 @@ public class Dialogs {
 
         MaterialDialog dialog = new MaterialDialog.Builder(context)
                 .customView(R.layout.utils_dlg_loader, true)
+                .theme(Theme.LIGHT)
                 .negativeText(R.string.utils_cancel)
                 .build();
 
@@ -109,6 +114,7 @@ public class Dialogs {
 
         MaterialDialog dialog = new MaterialDialog.Builder(context)
                 .title(title)
+                .theme(Theme.LIGHT)
                 .customView(R.layout.utils_dlg_edittext, true)
                 .positiveText(positiveText)
                 .negativeText(R.string.utils_cancel)
@@ -154,6 +160,7 @@ public class Dialogs {
         MaterialDialog dialog = new MaterialDialog.Builder(context)
                 .title(title)
                 .customView(R.layout.utils_dlg_ratingbar, true)
+                .theme(Theme.LIGHT)
                 .positiveText(R.string.utils_validate)
                 .negativeText(R.string.utils_cancel)
                 .callback(new MaterialDialog.ButtonCallback() {
@@ -180,6 +187,7 @@ public class Dialogs {
         MaterialDialog dialog = new MaterialDialog.Builder(context)
                 .title(title)
                 .customView(R.layout.utils_dlg_numberpicker, true)
+                .theme(Theme.LIGHT)
                 .positiveText(R.string.utils_validate)
                 .negativeText(R.string.utils_cancel)
                 .callback(new MaterialDialog.ButtonCallback() {
