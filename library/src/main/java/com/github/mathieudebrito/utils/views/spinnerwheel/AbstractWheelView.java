@@ -24,6 +24,8 @@
 
 package com.github.mathieudebrito.utils.views.spinnerwheel;
 
+import android.animation.Animator;
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.*;
@@ -31,8 +33,6 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 
 import com.github.mathieudebrito.utils.R;
-import com.nineoldandroids.animation.Animator;
-import com.nineoldandroids.animation.ObjectAnimator;
 
 
 /**
@@ -102,12 +102,12 @@ public abstract class AbstractWheelView extends AbstractWheel {
     protected Paint mSeparatorsPaint;
 
     /**
-     * {@link com.nineoldandroids.animation.Animator} for dimming the selector spinnerwheel.
+     * {@link Animator} for dimming the selector spinnerwheel.
      */
     protected Animator mDimSelectorWheelAnimator;
 
     /**
-     * {@link com.nineoldandroids.animation.Animator} for dimming the selector spinnerwheel.
+     * {@link Animator} for dimming the selector spinnerwheel.
      */
     protected Animator mDimSeparatorsAnimator;
 

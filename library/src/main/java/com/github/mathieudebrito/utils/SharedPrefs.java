@@ -14,7 +14,7 @@ public class SharedPrefs {
 
     public static final String PREFS_CREATED = "preferences_created";
     public static final String PREFS_VERSION = "preferences_version";
-    public static String app = "geovelo";
+    public static String app = "mdb";
     public static boolean resetAtLaunch = false;
     public static boolean resetAtVersion = false;
 
