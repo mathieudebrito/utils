@@ -36,6 +36,10 @@ public class Toasts {
     }
 
     public static void showMessageWithIcon(Context context, int message, int icon) {
+        showMessageWithIcon(context, context.getString(message), icon);
+    }
+
+    public static void showMessageWithIcon(Context context, String message, int icon) {
         Toast toast = Toast.makeText(context, message, Toast.LENGTH_LONG);
 
         LinearLayout horizontalLayout = new LinearLayout(context);

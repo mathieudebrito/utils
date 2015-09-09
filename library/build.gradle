@@ -1,5 +1,11 @@
 apply plugin: 'com.android.library'
 
+repositories {
+    jcenter()
+    mavenCentral()
+    maven { url 'https://dl.bintray.com/drummer-aidan/maven' }
+}
+
 android {
     compileSdkVersion 21
     buildToolsVersion "22.0.0"
@@ -7,7 +13,7 @@ android {
     // DO NOT FORGET TO ALSO UPDATE THE GRADLE.PROPERTIES
     def versionMajor = 1
     def versionMinor = 2
-    def versionPatch = 1
+    def versionPatch = 6
     // DO NOT FORGET TO ALSO UPDATE THE GRADLE.PROPERTIES
 
     defaultConfig {
@@ -29,13 +35,12 @@ dependencies {
     compile 'com.android.support:appcompat-v7:22.1.1'
 
     // Google
-    compile 'com.google.android.gms:play-services-base:7.0.0'
-    compile 'com.google.android.gms:play-services-analytics:7.0.0'
+    compile 'com.google.android.gms:play-services-base:7.5.0'
     compile 'com.google.guava:guava:18.0'
     compile 'com.google.code.gson:gson:2.3.1'
 
     // Custom Views
-    compile 'com.afollestad:material-dialogs:0.7.2.8'                   // Material dialogs
+    compile 'com.afollestad:material-dialogs:0.7.6.0'                  // Material dialogs
     compile 'com.github.gabrielemariotti.changeloglib:library:1.5.2'    // Changelog
 }
 
