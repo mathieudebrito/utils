@@ -155,24 +155,8 @@ public class Logs {
         return className;
     }
 
-    public static Builder verbose() {
-        return new Builder(Type.VERBOSE).tag(tag);
-    }
-
-    public static Builder debug() {
-        return new Builder(Type.DEBUG).tag(tag);
-    }
-
-    public static Builder info() {
-        return new Builder(Type.INFO).tag(tag);
-    }
-
-    public static Builder warn() {
-        return new Builder(Type.WARN).tag(tag);
-    }
-
-    public static Builder error() {
-        return new Builder(Type.ERROR).tag(tag);
+    public static Builder message(String message) {
+        return new Builder(message).tag(tag);
     }
 
     public static class Builder {
@@ -182,12 +166,17 @@ public class Logs {
         private String classe;
         private Type type;
 
-        public Builder(Type type) {
-            this.type = type;
+        public Builder(String message) {
+            this.message = message;
         }
 
         public Builder tag(String tag) {
             this.tag = tag;
+            return this;
+        }
+
+        public Builder type(Type type) {
+            this.type = type;
             return this;
         }
 
@@ -206,7 +195,32 @@ public class Logs {
             return this;
         }
 
-        public void print() {
+        public void verbose() {
+            this.type(Type.VERBOSE);
+            print();
+        }
+
+        public void debug() {
+            this.type(Type.DEBUG);
+            print();
+        }
+
+        public void info() {
+            this.type(Type.INFO);
+            print();
+        }
+
+        public void warning() {
+            this.type(Type.WARN);
+            print();
+        }
+
+        public void error() {
+            this.type(Type.ERROR);
+            print();
+        }
+
+        private void print() {
 
             if (canPrint()) {
                 StringBuilder log = new StringBuilder();
