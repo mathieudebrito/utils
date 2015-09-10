@@ -12,7 +12,7 @@ public class Logs {
     public static String logHeader = "";
     public static String tag = "[MDB_LOG]";
 
-    public static boolean forced = false;
+    protected static boolean printOnReleaseBuildEnabled = false;
 
     public static final int LOG = 1;
     public static final int NO_LOG = 2;
@@ -25,207 +25,136 @@ public class Logs {
         ERROR
     }
 
+    public static void enablePrintOnReleaseBuild() {
+        printOnReleaseBuildEnabled = true;
+    }
+
     public static boolean canPrint() {
-        return forced || BuildConfig.DEBUG;
+        return printOnReleaseBuildEnabled || BuildConfig.DEBUG;
     }
 
-    public static void debug(String logMessage) {
-        if (canPrint()) {
-            Logs.log(logMessage, DEFAULT);
-        }
+    public static Builder verbose() {
+        return new Builder(null).type(Type.VERBOSE).tag(tag);
     }
 
-    public static void debug(Object object, String message) {
-        if (canPrint()) {
-            debug(getMessageWithClassName(object, message));
-        }
+    public static Builder verbose(String message) {
+        return new Builder(message).type(Type.VERBOSE).tag(tag);
     }
 
-    public static void debug(Object object, String function, String message) {
-        debug(getMessageWithFunction(object, function, message));
+    public static void verbose(Object classe, String message) {
+        new Builder(message).type(Type.VERBOSE).tag(tag).object(classe);
     }
 
-    public static void info(String message) {
-        if (canPrint()) {
-            Log.i(tag, logHeader + message);
-        }
+    public static void verbose(Object classe, String method, String message) {
+        new Builder(message).type(Type.VERBOSE).tag(tag).method(method).object(classe);
     }
 
-    public static void info(Object object, String message) {
-        info(getMessageWithClassName(object, message));
+    public static Builder debug() {
+        return new Builder(null).type(Type.DEBUG).tag(tag);
     }
 
-    public static void info(Object object, String function, String message) {
-        info(getMessageWithFunction(object, function, message));
+    public static Builder debug(String message) {
+        return new Builder(message).type(Type.DEBUG).tag(tag);
     }
 
-    public static void error(String message) {
-        if (canPrint()) {
-            Log.e(tag, logHeader + message);
-        }
+    public static void debug(Object classe, String message) {
+        new Builder(message).type(Type.DEBUG).tag(tag).object(classe);
     }
 
-    public static void error(Object object, String message) {
-        error(getMessageWithClassName(object, message));
+    public static void debug(Object classe, String method, String message) {
+        new Builder(message).type(Type.DEBUG).tag(tag).method(method).object(classe);
     }
 
-    public static void error(Object object, String function, String message) {
-        error(getMessageWithFunction(object, function, message));
+    public static Builder info() {
+        return new Builder(null).type(Type.INFO).tag(tag);
     }
 
-    public static void warn(String message) {
-        if (canPrint()) {
-            Log.w(tag, logHeader + message);
-        }
+    public static Builder info(String message) {
+        return new Builder(message).type(Type.INFO).tag(tag);
     }
 
-    public static void warn(Object object, String message) {
-        warn(getMessageWithClassName(object, message));
+    public static void info(Object classe, String message) {
+        new Builder(message).type(Type.INFO).tag(tag).object(classe);
     }
 
-    public static void warn(Object object, String function, String message) {
-        warn(getMessageWithFunction(object, function, message));
+    public static void info(Object classe, String method, String message) {
+        new Builder(message).type(Type.INFO).tag(tag).method(method).object(classe);
     }
 
-    public static void logClick(String logButtonName) {
-        if (canPrint()) {
-            Logs.log(" ~ Button " + logButtonName + " clicked", DEFAULT);
-        }
+    public static Builder warn() {
+        return new Builder(null).type(Type.WARN).tag(tag);
     }
 
-    public static void logMenu(String logMenu) {
-        if (canPrint()) {
-            Logs.log(" # " + logMenu + " asked", DEFAULT);
-        }
+    public static Builder warn(String message) {
+        return new Builder(message).type(Type.WARN).tag(tag);
     }
 
-    public static void logValue(String logValueName, String logValue) {
-        if (canPrint()) {
-            Logs.log(" |" + logValueName + "| = " + logValue, DEFAULT);
-        }
+    public static void warn(Object classe, String message) {
+        new Builder(message).type(Type.WARN).tag(tag).object(classe);
     }
 
-    public static void log(String logMessage) {
-        debug(logMessage);
+    public static void warn(Object classe, String method, String message) {
+        new Builder(message).type(Type.WARN).tag(tag).method(method).object(classe);
     }
 
-    public static void log(String logMessage, int logType) {
-        if (canPrint()) {
-
-            String logTypeString;
-            switch (logType) {
-                case DEFAULT:
-                    logTypeString = tag;
-                    break;
-
-                case ACTIVITY_MANAGER:
-                    logTypeString = "ActivityManager";
-                    break;
-
-                case ANDROID_RUNTIME:
-                    logTypeString = "AndroidRuntime";
-                    break;
-
-                default:
-                    logTypeString = tag;
-                    break;
-            }
-            Log.d(logTypeString, logHeader + logMessage);
-        }
+    public static Builder error() {
+        return new Builder(null).type(Type.ERROR).tag(tag);
     }
 
-    public static String getMessageWithClassName(Object object, String message) {
-        return "[" + getClassName(object) + "] " + message;
+    public static Builder error(String message) {
+        return new Builder(message).type(Type.ERROR).tag(tag);
     }
 
-    public static String getMessageWithFunction(Object object, String function, String message) {
-        return "[" + getClassName(object) + "] " + function + "( " + message + " )";
+    public static void error(Object classe, String message) {
+        new Builder(message).type(Type.ERROR).tag(tag).object(classe);
     }
 
-    public static String getClassName(Object object) {
-        if (object == null) {
-            return "UnknownClass";
-        }
-        String className = object.getClass().toString();
-        String[] path = className.split("\\.");
-        className = path[path.length - 1];
-        if (className.endsWith("_")) {
-            className = className.substring(0, className.length() - 1);
-        }
-        return className;
-    }
-
-    public static Builder message(String message) {
-        return new Builder(message).tag(tag);
+    public static void error(Object classe, String method, String message) {
+        new Builder(message).type(Type.ERROR).tag(tag).method(method).object(classe);
     }
 
     public static class Builder {
         private String tag;
         private String message;
         private String method;
-        private String classe;
+        private String object;
         private Type type;
 
         public Builder(String message) {
             this.message = message;
         }
 
-        public Builder tag(String tag) {
+        protected Builder tag(String tag) {
             this.tag = tag;
             return this;
         }
 
-        public Builder type(Type type) {
+        protected Builder type(Type type) {
             this.type = type;
             return this;
         }
 
-        public Builder message(String message) {
-            this.message = message;
-            return this;
+        public void object(Object object) {
+            this.object = Objects.name(object);
+            print();
         }
 
         public Builder method() {
-            this.method = Thread.currentThread().getStackTrace()[1].getMethodName();
+            this.method = Thread.currentThread().getStackTrace()[3].getMethodName();
             return this;
         }
 
-        public Builder classe(Object object) {
-            this.classe = getClassName(object);
+        public Builder method(String method) {
+            this.method = method;
             return this;
         }
 
-        public void verbose() {
-            this.type(Type.VERBOSE);
-            print();
-        }
-
-        public void debug() {
-            this.type(Type.DEBUG);
-            print();
-        }
-
-        public void info() {
-            this.type(Type.INFO);
-            print();
-        }
-
-        public void warning() {
-            this.type(Type.WARN);
-            print();
-        }
-
-        public void error() {
-            this.type(Type.ERROR);
-            print();
-        }
-
-        private void print() {
+        protected void print() {
 
             if (canPrint()) {
                 StringBuilder log = new StringBuilder();
-                if (!Strings.isNullOrEmpty(classe)) {
-                    log.append("[" + classe + "] ");
+                if (!Strings.isNullOrEmpty(object)) {
+                    log.append("[" + object + "] ");
                 }
                 if (!Strings.isNullOrEmpty(method)) {
                     log.append(method + " ");
@@ -239,15 +168,15 @@ public class Logs {
                 }
 
                 if (type == Type.VERBOSE) {
-                    Log.v(tag, message);
+                    Log.v(tag, log.toString());
                 } else if (type == Type.DEBUG) {
-                    Log.d(tag, message);
+                    Log.d(tag, log.toString());
                 } else if (type == Type.INFO) {
-                    Log.i(tag, message);
+                    Log.i(tag, log.toString());
                 } else if (type == Type.WARN) {
-                    Log.w(tag, message);
+                    Log.w(tag, log.toString());
                 } else if (type == Type.ERROR) {
-                    Log.e(tag, message);
+                    Log.e(tag, log.toString());
                 }
             }
         }
