@@ -5,9 +5,9 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 
-public class AppUtils {
+public class CurrentApp {
 
-    public static String getVersion(Context context) {
+    public static String getVersionName(Context context) {
         try {
             PackageInfo pInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
             return pInfo.versionName;
@@ -27,11 +27,11 @@ public class AppUtils {
         return (String) (lApplicationInfo != null ? lPackageManager.getApplicationLabel(lApplicationInfo) : "Unknown");
     }
 
-    public static String getPackage(Context context) {
+    public static String getPackageName(Context context) {
         return context.getPackageName();
     }
 
     public static boolean isRelease(Context context) {
-        return !getPackage(context).contains("debug") && !getPackage(context).contains("alpha") && !getPackage(context).contains("beta");
+        return !getPackageName(context).contains("debug") && !getPackageName(context).contains("alpha") && !getPackageName(context).contains("beta");
     }
 }

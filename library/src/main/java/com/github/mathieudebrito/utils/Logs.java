@@ -33,84 +33,33 @@ public class Logs {
         return printOnReleaseBuildEnabled || BuildConfig.DEBUG;
     }
 
-    public static Builder verbose() {
-        return new Builder(null).type(Type.VERBOSE).tag(tag);
+
+    public static void method(Object classe) {
+        method(classe, null);
     }
 
-    public static Builder verbose(String message) {
-        return new Builder(message).type(Type.VERBOSE).tag(tag);
+    public static void method(Object classe, String message) {
+        new Builder(message).type(Type.VERBOSE).tag(tag).object(classe).method().print();
     }
 
     public static void verbose(Object classe, String message) {
-        new Builder(message).type(Type.VERBOSE).tag(tag).object(classe);
-    }
-
-    public static void verbose(Object classe, String method, String message) {
-        new Builder(message).type(Type.VERBOSE).tag(tag).method(method).object(classe);
-    }
-
-    public static Builder debug() {
-        return new Builder(null).type(Type.DEBUG).tag(tag);
-    }
-
-    public static Builder debug(String message) {
-        return new Builder(message).type(Type.DEBUG).tag(tag);
+        new Builder(message).type(Type.VERBOSE).tag(tag).object(classe).method().print();
     }
 
     public static void debug(Object classe, String message) {
-        new Builder(message).type(Type.DEBUG).tag(tag).object(classe);
-    }
-
-    public static void debug(Object classe, String method, String message) {
-        new Builder(message).type(Type.DEBUG).tag(tag).method(method).object(classe);
-    }
-
-    public static Builder info() {
-        return new Builder(null).type(Type.INFO).tag(tag);
-    }
-
-    public static Builder info(String message) {
-        return new Builder(message).type(Type.INFO).tag(tag);
+        new Builder(message).type(Type.DEBUG).tag(tag).object(classe).method().print();
     }
 
     public static void info(Object classe, String message) {
-        new Builder(message).type(Type.INFO).tag(tag).object(classe);
-    }
-
-    public static void info(Object classe, String method, String message) {
-        new Builder(message).type(Type.INFO).tag(tag).method(method).object(classe);
-    }
-
-    public static Builder warn() {
-        return new Builder(null).type(Type.WARN).tag(tag);
-    }
-
-    public static Builder warn(String message) {
-        return new Builder(message).type(Type.WARN).tag(tag);
+        new Builder(message).type(Type.INFO).tag(tag).object(classe).method().print();
     }
 
     public static void warn(Object classe, String message) {
-        new Builder(message).type(Type.WARN).tag(tag).object(classe);
-    }
-
-    public static void warn(Object classe, String method, String message) {
-        new Builder(message).type(Type.WARN).tag(tag).method(method).object(classe);
-    }
-
-    public static Builder error() {
-        return new Builder(null).type(Type.ERROR).tag(tag);
-    }
-
-    public static Builder error(String message) {
-        return new Builder(message).type(Type.ERROR).tag(tag);
+        new Builder(message).type(Type.WARN).tag(tag).object(classe).method().print();
     }
 
     public static void error(Object classe, String message) {
-        new Builder(message).type(Type.ERROR).tag(tag).object(classe);
-    }
-
-    public static void error(Object classe, String method, String message) {
-        new Builder(message).type(Type.ERROR).tag(tag).method(method).object(classe);
+        new Builder(message).type(Type.ERROR).tag(tag).object(classe).method().print();
     }
 
     public static class Builder {
@@ -134,9 +83,9 @@ public class Logs {
             return this;
         }
 
-        public void object(Object object) {
+        public Builder object(Object object) {
             this.object = Objects.name(object);
-            print();
+            return this;
         }
 
         public Builder method() {
@@ -149,7 +98,7 @@ public class Logs {
             return this;
         }
 
-        protected void print() {
+        public void print() {
 
             if (canPrint()) {
                 StringBuilder log = new StringBuilder();
