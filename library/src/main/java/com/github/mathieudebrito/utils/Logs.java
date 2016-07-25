@@ -89,7 +89,11 @@ public class Logs {
         }
 
         public Builder method() {
-            this.method = Thread.currentThread().getStackTrace()[3].getMethodName();
+            this.method = Thread.currentThread().getStackTrace()[4].getMethodName();
+            if( method.equals("verbose") || method.equals("debug") ||method.equals("info") || method.equals("method") || method.equals("warn") || method.equals("error")){
+                this.method = Thread.currentThread().getStackTrace()[5].getMethodName();
+            }
+
             return this;
         }
 
@@ -106,7 +110,12 @@ public class Logs {
                     log.append("[" + object + "] ");
                 }
                 if (!Strings.isNullOrEmpty(method)) {
-                    log.append(method + " ");
+                    log.append(method);
+                    if (Strings.isNullOrEmpty(message)) {
+                        log.append("()");
+                    } else {
+                        log.append(" ");
+                    }
                 }
                 if (!Strings.isNullOrEmpty(message)) {
                     if (!Strings.isNullOrEmpty(method)) {

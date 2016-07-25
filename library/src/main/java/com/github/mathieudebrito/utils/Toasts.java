@@ -3,6 +3,8 @@ package com.github.mathieudebrito.utils;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -40,31 +42,25 @@ public class Toasts {
     }
 
     public static void showMessageWithIcon(Context context, String message, int icon) {
-        Toast toast = Toast.makeText(context, message, Toast.LENGTH_LONG);
+        try {
+            View layout = LayoutInflater.from(context).inflate(R.layout.utils_toa_with_icon, null);
 
-        LinearLayout horizontalLayout = new LinearLayout(context);
-        horizontalLayout.setOrientation(LinearLayout.HORIZONTAL);
-        horizontalLayout.setGravity(Gravity.CENTER);
+            // Add image
+            ImageView imgIcon = (ImageView) layout.findViewById(R.id.imgIcon);
+            imgIcon.setImageResource(icon);
 
-        // Add textView
-        TextView txtMessage = new TextView(context);
-        txtMessage.setTextColor(Color.WHITE);
-        txtMessage.setPadding(20, 0, 0, 0);
-        txtMessage.setText(message);
+            // Add textView
+            TextView txtMessage = (TextView) layout.findViewById(R.id.txtMessage);
+            txtMessage.setText(message);
 
-        // Layout it
-        if (icon != -1) {
-            ImageView imgWarn = new ImageView(context);
-            imgWarn.setImageResource(icon);
-            horizontalLayout.addView(imgWarn);
-            imgWarn.getLayoutParams().height = 90;
-            imgWarn.getLayoutParams().width = 90;
+            Toast toast = new Toast(context);
+            toast.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 20);
+            toast.setDuration(Toast.LENGTH_LONG);
+            toast.setView(layout);
+            toast.show();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        horizontalLayout.addView(txtMessage);
-        toast.setView(horizontalLayout);
-
-        // Show it
-        toast.show();
     }
 
 
