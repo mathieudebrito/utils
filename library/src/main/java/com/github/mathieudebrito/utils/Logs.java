@@ -5,17 +5,10 @@ import android.util.Log;
 import com.google.common.base.Strings;
 
 public class Logs {
-    public static final int DEFAULT = 1;
-    public static final int ACTIVITY_MANAGER = 2;
-    public static final int ANDROID_RUNTIME = 3;
-
-    public static String logHeader = "";
     public static String tag = "[MDB_LOG]";
 
     protected static boolean printOnReleaseBuildEnabled = false;
-
-    public static final int LOG = 1;
-    public static final int NO_LOG = 2;
+    protected static boolean logsEnabled = true;
 
     public enum Type {
         VERBOSE,
@@ -29,10 +22,13 @@ public class Logs {
         printOnReleaseBuildEnabled = true;
     }
 
-    public static boolean canPrint() {
-        return printOnReleaseBuildEnabled || BuildConfig.DEBUG;
+    public static void enableLog(boolean enable) {
+        logsEnabled = enable;
     }
 
+    public static boolean canPrint() {
+        return logsEnabled && (printOnReleaseBuildEnabled || BuildConfig.DEBUG);
+    }
 
     public static void method(Object classe) {
         method(classe, null);
@@ -90,7 +86,7 @@ public class Logs {
 
         public Builder method() {
             this.method = Thread.currentThread().getStackTrace()[4].getMethodName();
-            if( method.equals("verbose") || method.equals("debug") ||method.equals("info") || method.equals("method") || method.equals("warn") || method.equals("error")){
+            if (method.equals("verbose") || method.equals("debug") || method.equals("info") || method.equals("method") || method.equals("warn") || method.equals("error")) {
                 this.method = Thread.currentThread().getStackTrace()[5].getMethodName();
             }
 
